@@ -1,0 +1,957 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "sport_events_voxteneo API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/organizers": {
+      "get": {
+        "tags": [
+          "organizer-resource"
+        ],
+        "summary": "getAllOrganizers",
+        "description": "Get list of all organizers",
+        "operationId": "getAllOrganizers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Page number of the requested page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Organizer"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "organizer-resource"
+        ],
+        "summary": "createOrganizer",
+        "description": "Create organizer",
+        "operationId": "createOrganizer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdateOrganizer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organizer"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/organizers/{id}": {
+      "get": {
+        "tags": [
+          "organizer-resource"
+        ],
+        "summary": "getOrganizer",
+        "description": "Get single organizer",
+        "operationId": "getOrganizer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organizer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "organizer-resource"
+        ],
+        "summary": "updateOrganizer",
+        "description": "Update organizer",
+        "operationId": "updateOrganizer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUpdateOrganizer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUpdateOrganizer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "organizer-resource"
+        ],
+        "summary": "deleteOrganizer",
+        "description": "Delete organizer",
+        "operationId": "deleteOrganizer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/sport-events": {
+      "get": {
+        "tags": [
+          "sport-event-resource"
+        ],
+        "summary": "getAllSportEvents",
+        "description": "Get list of all sport events",
+        "operationId": "getAllSportEvents",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Page number of the requested page"
+          },
+          {
+            "name": "organizerId",
+            "in": "query",
+            "description": "Organizer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SportEvent"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "sport-event-resource"
+        ],
+        "summary": "createSportEvent",
+        "description": "Create sport event",
+        "operationId": "createSportEvent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSportEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSportEvent"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/sport-events/{id}": {
+      "get": {
+        "tags": [
+          "sport-event-resource"
+        ],
+        "summary": "getSportEvent",
+        "description": "Get single sport event",
+        "operationId": "getSportEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "sport-event-resource"
+        ],
+        "summary": "updateSportEvent",
+        "description": "Update sport event",
+        "operationId": "updateSportEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSportEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateSportEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "sport-event-resource"
+        ],
+        "summary": "deleteSportEvent",
+        "description": "Delete sport event",
+        "operationId": "deleteSportEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users": {
+      "post": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "createUser",
+        "description": "Create user",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{id}": {
+      "get": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "getUser",
+        "description": "Get single user",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "updateUser",
+        "description": "Update user",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "deleteUser",
+        "description": "Delete user",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}/password": {
+      "put": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "changePassword",
+        "operationId": "changePassword",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "oldPassword": {
+                    "type": "string"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  },
+                  "repeatPassword": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": [
+          "user-resource"
+        ],
+        "summary": "loginUser",
+        "operationId": "loginUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateUpdateOrganizer": {
+        "required": [
+          "organizerName",
+          "imageLocation"
+        ],
+        "properties": {
+          "organizerName": {
+            "type": "string"
+          },
+          "imageLocation": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CreateSportEvent": {
+        "required": [
+          "organizerId",
+          "eventDate",
+          "eventName",
+          "eventType"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "eventType": {
+            "type": "string"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "organizerId": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateSportEvent": {
+        "required": [
+          "organizerId",
+          "eventDate",
+          "eventName",
+          "eventType"
+        ],
+        "properties": {
+          "eventDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "eventType": {
+            "type": "string"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "organizerId": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "CreateUser": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "repeatPassword"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "repeatPassword": {
+            "type": "string",
+            "format": "password"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateUser": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Organizer": {
+        "required": [
+          "organizerName",
+          "imageLocation"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "organizerName": {
+            "type": "string"
+          },
+          "imageLocation": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SportEvent": {
+        "required": [
+          "id",
+          "eventDate",
+          "eventName",
+          "eventType",
+          "organizer"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "eventName": {
+            "type": "string"
+          },
+          "eventType": {
+            "type": "string"
+          },
+          "organizer": {
+            "$ref": "#/components/schemas/Organizer"
+          }
+        },
+        "type": "object"
+      },
+      "User": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "repeatPassword"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "name": "bearerAuth",
+        "in": "header",
+        "bearerFormat": "JWT",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "organizer-resource"
+    },
+    {
+      "name": "sport-event-resource"
+    },
+    {
+      "name": "user-resource"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
