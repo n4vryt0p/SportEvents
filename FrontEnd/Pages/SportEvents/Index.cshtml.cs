@@ -1,5 +1,6 @@
 using System.Text.Json;
 using AutoMapper;
+using DevExtreme.AspNet.Data;
 using FrontEnd.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -98,21 +99,49 @@ public class IndexModel : PageModel
             return BadRequest("Server Error");
         }
     }
+}
 
+public class GroupDdl
+{
+    public int Id { get; set; }
+    public string Text { get; set; }
+}
 
+[System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+public partial class GridServerSide
+{
+    [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public int? Skip { get; set; }
 
-    //public async Task<IActionResult?> OnGetDetailsAsync(long uId)
-    //{
-    //    try
-    //    {
-    //        if (uId < 0) return null;
-    //        var response = await _manageEngineApi.Ready().NewsDetailsAsync(uId);
+    [Newtonsoft.Json.JsonProperty("take", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public int? Take { get; set; }
 
-    //        return new JsonResult(response);
-    //    }
-    //    catch
-    //    {
-    //        return null;
-    //    }
-    //}
+    [Newtonsoft.Json.JsonProperty("requireTotalCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public bool? RequireTotalCount { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("sort", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public string Sort { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("filter", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public string Filter { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("sorting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public System.Collections.Generic.ICollection<SortingInfo> Sorting { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("filtering", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public System.Collections.Generic.ICollection<Filter> Filtering { get; set; }
+
+}
+[System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+public partial class Filter
+{
+    [Newtonsoft.Json.JsonProperty("column", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public string Column { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public string Value { get; set; }
+
+    [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    public int? Type { get; set; }
+
 }
