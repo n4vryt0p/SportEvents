@@ -11,27 +11,29 @@
                 <h5 class="card-title mb-0 flex-grow-1">Users</h5>
             </div>
             <div class="card-body">
+                <form id="meLogin">
                 <div class="input-group mb-3">
                     <span class="input-group-text">First and last name</span>
                     <input type="text" aria-label="First name" class="form-control" name="firstName" value="@Model.Users?.FirstName">
                     <input type="text" aria-label="Last name" class="form-control" name="lastName" value="@Model.Users?.LastName">
                 </div>
-                
+
                 <div>
                     <label for="basiInput" class="form-label">Email</label>
                     <input type="email" aria-label="Email" class="form-control" id="email" name="email" value="@Model.Users?.Email">
                 </div>
-                <input type="hidden" value="@Model.Users?.Id" />
+                <input type="hidden" value="@Model.Users?.Id" id="uId"/>
+                </form>
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary float-end" onclick="save();">Save</button>
+                <button class="btn btn-primary float-end" onclick="save(event)">Save</button>
+                <button class="btn btn-danger" onclick="del(event)">Delete My account</button>
             </div>
         </div>
     </div>
 </div>
 @section scripts{
     <!--datatable js-->
-    <script src="~/js/dx.all.js"></script>
-    <script src="~/js/dx.aspnet.data.js"></script>
+    <script src="~/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="~/js/role-page.js"></script>
 }

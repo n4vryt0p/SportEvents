@@ -12,14 +12,12 @@ namespace FrontEnd.Pages.Auth;
 [AllowAnonymous]
 public class LoginModel : PageModel
 {
-    //private readonly IHttpClientFactory _httpClientFactory;
     private readonly IConfiguration _iConfig;
     private readonly IAuthSsoKc _authClaims;
 
-    public LoginModel(IConfiguration iConfig/*, IHttpClientFactory httpClientFactory*/, IAuthSsoKc authClaims)
+    public LoginModel(IConfiguration iConfig, IAuthSsoKc authClaims)
     {
         _iConfig = iConfig;
-        //_httpClientFactory = httpClientFactory;
         _authClaims = authClaims;
     }
 
@@ -36,48 +34,47 @@ public class LoginModel : PageModel
         try
         {
             IConfigurationSection urlCap = _iConfig.GetSection("Configs");
-            
-            if (Login != null)
+
+            if (Login == null)
+                return BadRequest(
+                    "Your username is not registered in our application or your username / password is wrong. Error Code: 1");
+
+            var claimings = await _authClaims.AddClaims(Login.Email, Login.Password);
+            if (claimings != null)
             {
-                var claimings = await _authClaims.AddClaims(Login.Email, Login.Password);
-                if (claimings != null)
+                //ClaimsIdentity claimsIdentity = claimings.claimIdent;
+
+                AuthenticationProperties authProperties = new()
                 {
-                    //ClaimsIdentity claimsIdentity = claimings.claimIdent;
+                    //AllowRefresh = <bool>,
+                    // Refreshing the authentication session should be allowed.
 
-                    AuthenticationProperties authProperties = new()
-                    {
-                        //AllowRefresh = <bool>,
-                        // Refreshing the authentication session should be allowed.
+                    //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                    // The time at which the authentication ticket expires. A 
+                    // value set here overrides the ExpireTimeSpan option of 
+                    // CookieAuthenticationOptions set with AddCookie.
 
-                        //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                        // The time at which the authentication ticket expires. A 
-                        // value set here overrides the ExpireTimeSpan option of 
-                        // CookieAuthenticationOptions set with AddCookie.
+                    //IsPersistent = true,
+                    // Whether the authentication session is persisted across  
+                    // multiple requests. When used with cookies, controls
+                    // whether the cookie's lifetime is absolute (matching the
+                    // lifetime of the authentication ticket) or session-based.
 
-                        //IsPersistent = true,
-                        // Whether the authentication session is persisted across  
-                        // multiple requests. When used with cookies, controls
-                        // whether the cookie's lifetime is absolute (matching the
-                        // lifetime of the authentication ticket) or session-based.
+                    //IssuedUtc = <DateTimeOffset>,
+                    // The time at which the authentication ticket was issued.
 
-                        //IssuedUtc = <DateTimeOffset>,
-                        // The time at which the authentication ticket was issued.
+                    RedirectUri = CookieAuthenticationDefaults.ReturnUrlParameter,
+                    // The full path or absolute URI to be used as an http 
+                    // redirect response value.
+                };
 
-                        RedirectUri = CookieAuthenticationDefaults.ReturnUrlParameter,
-                        // The full path or absolute URI to be used as an http 
-                        // redirect response value.
-                    };
-
-                    await HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(claimings.claimIdent),
-                        authProperties);
-                }
-
-                return new JsonResult(new { claimings?.Pic, tok = claimings?.Tok });
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimings.claimIdent),
+                    authProperties);
             }
 
-            return BadRequest("Your username is not registered in our application or your username / password is wrong. Error Code: 1");
+            return new JsonResult(new { claimings?.Pic, tok = claimings?.Tok });
 
         }
         catch (Exception e)

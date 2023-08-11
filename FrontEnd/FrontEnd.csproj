@@ -10,12 +10,16 @@
   <ItemGroup>
     <Compile Remove="Pages\AdminConsole\**" />
     <Compile Remove="ViewComponents\**" />
+    <Compile Remove="wwwroot\assets\scss\**" />
     <Content Remove="Pages\AdminConsole\**" />
     <Content Remove="ViewComponents\**" />
+    <Content Remove="wwwroot\assets\scss\**" />
     <EmbeddedResource Remove="Pages\AdminConsole\**" />
     <EmbeddedResource Remove="ViewComponents\**" />
+    <EmbeddedResource Remove="wwwroot\assets\scss\**" />
     <None Remove="Pages\AdminConsole\**" />
     <None Remove="ViewComponents\**" />
+    <None Remove="wwwroot\assets\scss\**" />
   </ItemGroup>
 
   <ItemGroup>

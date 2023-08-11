@@ -12,12 +12,10 @@ public interface IAuthSsoKc
 
 public class AuthSsoKc : IAuthSsoKc
 {
-    private readonly IConfiguration _iConfig;
     private readonly ISportEventApi _sportEventApi;
 
-    public AuthSsoKc(IConfiguration iConfig, ISportEventApi sportEventApi)
+    public AuthSsoKc(ISportEventApi sportEventApi)
     {
-        _iConfig = iConfig;
         _sportEventApi = sportEventApi;
     }
 

@@ -18,7 +18,7 @@ _ = builder.WebHost.ConfigureKestrel((context, options) =>
 var cfgs = builder.Configuration;
 builder.Services.RegisterDiServices(cfgs, null);
 
-var app = builder.Build();
+using var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -28,3 +28,5 @@ if (!app.Environment.IsDevelopment())
 app.AppConfigurations();
 
 app.Run();
+
+public partial class Program { }

@@ -13,11 +13,9 @@ namespace FrontEnd.Pages.Users;
 public class IndexModel : PageModel
 {
     private readonly ISportEventApi _sportEventApi;
-    private readonly IJsonOptions _jOpt;
 
-    public IndexModel(IJsonOptions jOpt, ISportEventApi sportEventApi)
+    public IndexModel(ISportEventApi sportEventApi)
     {
-        _jOpt = jOpt;
         _sportEventApi = sportEventApi;
     }
 
@@ -26,7 +24,7 @@ public class IndexModel : PageModel
 
     public async Task OnGet() => Users = await _sportEventApi.Ready().GetUserAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-    public async Task OnPostCreateAsync(CreateUser user) => await _sportEventApi.Ready().CreateUserAsync(user);
+    //public async Task OnPostCreateAsync(CreateUser user) => await _sportEventApi.Ready().CreateUserAsync(user);
 
     public async Task OnPutEditAsync(int uId, UpdateUser user) => await _sportEventApi.Ready().UpdateUserAsync(uId, user);
 
