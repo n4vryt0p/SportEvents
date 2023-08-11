@@ -152,9 +152,7 @@
 
   <ItemGroup>
     <None Include="OpenAPIs\api-docs.json" ClassName="SportEvents" />
-    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" ClassName="ManageEngine">
-      <SourceUri>http://209.97.175.123:82/swagger/v1/swagger.json</SourceUri>
-    </OpenApiReference>
+    <None Include="OpenAPIs\swagger.json" ClassName="ManageEngine" />
   </ItemGroup>
 
 </Project>
