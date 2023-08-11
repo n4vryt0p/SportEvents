@@ -65,10 +65,8 @@ function del(e) {
                 },
                 success: function (data) {
                     $.unblockUI();
-                    Swal.fire('Saved!', 'Your Account deleted', 'success').then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "../auth/login";
-                        }
+                    Swal.fire('Saved!', 'Your Account deleted, you will be logout', 'success').then((result) => {
+                        window.location.href = "../auth/logout";
                     })
                 },
                 error: function (data) {
